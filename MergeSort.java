@@ -1,67 +1,68 @@
-package com.Recursion;
+package com.RecursionNew;
 
 public class MergeSort {
 	
-	public static void merge(int[] s1, int[] s2, int[] orig) {
+	public static void merge(int[] left, int[] right, int[] a) {
 		int i=0;
 		int j=0;
 		int k=0;
 		
-		while(i<s1.length && j<s2.length) {
-			if(s1[i]<s2[j]) {
-				orig[k]=s1[i];
-				k++;
+		while(i<left.length && j<right.length) {
+			if(left[i] < right[j]) {
+				a[k] = left[i];
 				i++;
-			}
-			else {
-				orig[k]=s2[j];
 				k++;
+			} else {
+				a[k] = right[j];
 				j++;
+				k++;
 			}
 		}
 		
-		if(i<s1.length) {
-			while(i<s1.length) {
-				orig[k]=s1[i];
-				k++;
+		if(i < left.length) {
+			while(i< left.length) {
+				a[k] = left[i];
 				i++;
+				k++;
 			}
 		}
 		
-		if(j<s2.length) {
-			while(j<s2.length) {
-				orig[k]=s2[j];
-				k++;
+		if(j< right.length) {
+			while(j < right.length) {
+				a[k] = right[j];
 				j++;
+				k++;
 			}
 		}
 	}
 	
-	public static void mergeSortFunc(int[] arr) {
-		if(arr.length <=1) {
+	public static void mergeSort(int[] a) {
+		if(a.length <= 1) {
 			return;
 		}
 		
-		int b[]=new int[arr.length/2];
-		int c[]=new int[arr.length-b.length];
+		int left[] = new int[a.length/2];
+		int right[] = new int[a.length - left.length];
 		
-		for(int i=0;i<arr.length/2;i++) {
-			b[i]=arr[i];
+		for(int i=0; i<a.length/2; i++) {
+			left[i] = a[i];
 		}
 		
-		for(int j=arr.length/2;j<arr.length;j++) {
-			c[j-arr.length/2]=arr[j];
+		for(int i= a.length/2; i<a.length; i++) {
+			right[i-a.length/2] = a[i];
 		}
 		
-		mergeSortFunc(b);
-		mergeSortFunc(c);
-		merge(b,c,arr);
+		mergeSort(left);
+		mergeSort(right);
+		merge(left, right, a);
+		
 	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int[] a= {12,5,1,44,23,11,3,9};
-		mergeSortFunc(a);
+		int[] a = {8,5,9,2,3,1};
+		mergeSort(a);
+		
 		for(int i=0;i<a.length;i++) {
 			System.out.println(a[i]);
 		}
